@@ -33,6 +33,11 @@ const analyticsData = [
 
 const Index = () => {
   const [activeTab, setActiveTab] = useState('logistics');
+  const [energyFilter, setEnergyFilter] = useState<'all' | 'renewable' | 'nonrenewable'>('all');
+
+  const totalEnergy = 5847;
+  const renewableEnergy = 4246;
+  const nonRenewableEnergy = 1601;
 
   return (
     <div className="min-h-screen bg-background">
@@ -228,6 +233,68 @@ const Index = () => {
           </TabsContent>
 
           <TabsContent value="energy" className="space-y-6 animate-fade-in">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+              <Card 
+                className={`cursor-pointer transition-all hover:shadow-lg ${
+                  energyFilter === 'all' ? 'ring-2 ring-primary' : ''
+                }`}
+                onClick={() => setEnergyFilter('all')}
+              >
+                <CardHeader className="pb-3">
+                  <div className="flex items-center justify-between">
+                    <Icon name="Zap" className="text-primary" size={24} />
+                    <Badge variant={energyFilter === 'all' ? 'default' : 'outline'}>Всего</Badge>
+                  </div>
+                </CardHeader>
+                <CardContent>
+                  <div className="text-3xl font-bold">{totalEnergy.toLocaleString()}</div>
+                  <p className="text-sm text-muted-foreground">МВт общая выработка</p>
+                </CardContent>
+              </Card>
+
+              <Card 
+                className={`cursor-pointer transition-all hover:shadow-lg ${
+                  energyFilter === 'renewable' ? 'ring-2 ring-secondary' : ''
+                }`}
+                onClick={() => setEnergyFilter('renewable')}
+              >
+                <CardHeader className="pb-3">
+                  <div className="flex items-center justify-between">
+                    <Icon name="Leaf" className="text-secondary" size={24} />
+                    <Badge variant={energyFilter === 'renewable' ? 'default' : 'outline'} className={energyFilter === 'renewable' ? 'bg-secondary' : ''}>ВИЭ</Badge>
+                  </div>
+                </CardHeader>
+                <CardContent>
+                  <div className="text-3xl font-bold">{renewableEnergy.toLocaleString()}</div>
+                  <p className="text-sm text-muted-foreground">МВт возобновляемая</p>
+                  <div className="mt-2 text-xs text-secondary font-medium">
+                    {Math.round((renewableEnergy / totalEnergy) * 100)}% от общей
+                  </div>
+                </CardContent>
+              </Card>
+
+              <Card 
+                className={`cursor-pointer transition-all hover:shadow-lg ${
+                  energyFilter === 'nonrenewable' ? 'ring-2 ring-accent' : ''
+                }`}
+                onClick={() => setEnergyFilter('nonrenewable')}
+              >
+                <CardHeader className="pb-3">
+                  <div className="flex items-center justify-between">
+                    <Icon name="Flame" className="text-accent" size={24} />
+                    <Badge variant={energyFilter === 'nonrenewable' ? 'default' : 'outline'} className={energyFilter === 'nonrenewable' ? 'bg-accent' : ''}>Традиционная</Badge>
+                  </div>
+                </CardHeader>
+                <CardContent>
+                  <div className="text-3xl font-bold">{nonRenewableEnergy.toLocaleString()}</div>
+                  <p className="text-sm text-muted-foreground">МВт невозобновляемая</p>
+                  <div className="mt-2 text-xs text-muted-foreground font-medium">
+                    {Math.round((nonRenewableEnergy / totalEnergy) * 100)}% от общей
+                  </div>
+                </CardContent>
+              </Card>
+            </div>
+
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
               <Card>
                 <CardHeader>
@@ -272,59 +339,104 @@ const Index = () => {
               <Card>
                 <CardHeader>
                   <CardTitle className="flex items-center gap-2">
-                    <Icon name="Wind" className="text-secondary" size={20} />
-                    Объекты ВИЭ
+                    {energyFilter === 'all' && <Icon name="Zap" className="text-primary" size={20} />}
+                    {energyFilter === 'renewable' && <Icon name="Leaf" className="text-secondary" size={20} />}
+                    {energyFilter === 'nonrenewable' && <Icon name="Flame" className="text-accent" size={20} />}
+                    {energyFilter === 'all' ? 'Все источники энергии' : energyFilter === 'renewable' ? 'Возобновляемые источники' : 'Невозобновляемые источники'}
                   </CardTitle>
-                  <CardDescription>Возобновляемые источники энергии</CardDescription>
+                  <CardDescription>
+                    {energyFilter === 'all' ? 'Полный перечень энергетических объектов' : 
+                     energyFilter === 'renewable' ? 'Объекты ВИЭ' : 'Традиционные источники энергии'}
+                  </CardDescription>
                 </CardHeader>
                 <CardContent className="space-y-4">
-                  <div className="flex items-center justify-between p-4 rounded-lg bg-gradient-to-r from-secondary/10 to-secondary/5 border border-secondary/20">
-                    <div className="flex items-center gap-3">
-                      <div className="h-12 w-12 rounded-lg bg-secondary/20 flex items-center justify-center">
-                        <Icon name="Sun" className="text-secondary" size={24} />
+                  {(energyFilter === 'all' || energyFilter === 'renewable') && (
+                    <>
+                      <div className="flex items-center justify-between p-4 rounded-lg bg-gradient-to-r from-secondary/10 to-secondary/5 border border-secondary/20">
+                        <div className="flex items-center gap-3">
+                          <div className="h-12 w-12 rounded-lg bg-secondary/20 flex items-center justify-center">
+                            <Icon name="Sun" className="text-secondary" size={24} />
+                          </div>
+                          <div>
+                            <div className="font-bold text-xl">847 МВт</div>
+                            <div className="text-sm text-muted-foreground">Солнечная энергия</div>
+                          </div>
+                        </div>
+                        <div className="text-right">
+                          <div className="text-sm font-medium text-secondary">+15%</div>
+                          <div className="text-xs text-muted-foreground">за месяц</div>
+                        </div>
                       </div>
-                      <div>
-                        <div className="font-bold text-xl">847 МВт</div>
-                        <div className="text-sm text-muted-foreground">Солнечная энергия</div>
-                      </div>
-                    </div>
-                    <div className="text-right">
-                      <div className="text-sm font-medium text-secondary">+15%</div>
-                      <div className="text-xs text-muted-foreground">за месяц</div>
-                    </div>
-                  </div>
 
-                  <div className="flex items-center justify-between p-4 rounded-lg bg-gradient-to-r from-primary/10 to-primary/5 border border-primary/20">
-                    <div className="flex items-center gap-3">
-                      <div className="h-12 w-12 rounded-lg bg-primary/20 flex items-center justify-center">
-                        <Icon name="Wind" className="text-primary" size={24} />
+                      <div className="flex items-center justify-between p-4 rounded-lg bg-gradient-to-r from-primary/10 to-primary/5 border border-primary/20">
+                        <div className="flex items-center gap-3">
+                          <div className="h-12 w-12 rounded-lg bg-primary/20 flex items-center justify-center">
+                            <Icon name="Wind" className="text-primary" size={24} />
+                          </div>
+                          <div>
+                            <div className="font-bold text-xl">1,243 МВт</div>
+                            <div className="text-sm text-muted-foreground">Ветровая энергия</div>
+                          </div>
+                        </div>
+                        <div className="text-right">
+                          <div className="text-sm font-medium text-primary">+22%</div>
+                          <div className="text-xs text-muted-foreground">за месяц</div>
+                        </div>
                       </div>
-                      <div>
-                        <div className="font-bold text-xl">1,243 МВт</div>
-                        <div className="text-sm text-muted-foreground">Ветровая энергия</div>
-                      </div>
-                    </div>
-                    <div className="text-right">
-                      <div className="text-sm font-medium text-primary">+22%</div>
-                      <div className="text-xs text-muted-foreground">за месяц</div>
-                    </div>
-                  </div>
 
-                  <div className="flex items-center justify-between p-4 rounded-lg bg-gradient-to-r from-accent/10 to-accent/5 border border-accent/20">
-                    <div className="flex items-center gap-3">
-                      <div className="h-12 w-12 rounded-lg bg-accent/20 flex items-center justify-center">
-                        <Icon name="Droplet" className="text-accent" size={24} />
+                      <div className="flex items-center justify-between p-4 rounded-lg bg-gradient-to-r from-accent/10 to-accent/5 border border-accent/20">
+                        <div className="flex items-center gap-3">
+                          <div className="h-12 w-12 rounded-lg bg-accent/20 flex items-center justify-center">
+                            <Icon name="Droplet" className="text-accent" size={24} />
+                          </div>
+                          <div>
+                            <div className="font-bold text-xl">2,156 МВт</div>
+                            <div className="text-sm text-muted-foreground">Гидроэнергия</div>
+                          </div>
+                        </div>
+                        <div className="text-right">
+                          <div className="text-sm font-medium text-accent">+8%</div>
+                          <div className="text-xs text-muted-foreground">за месяц</div>
+                        </div>
                       </div>
-                      <div>
-                        <div className="font-bold text-xl">2,156 МВт</div>
-                        <div className="text-sm text-muted-foreground">Гидроэнергия</div>
+                    </>
+                  )}
+
+                  {(energyFilter === 'all' || energyFilter === 'nonrenewable') && (
+                    <>
+                      <div className="flex items-center justify-between p-4 rounded-lg bg-gradient-to-r from-accent/10 to-accent/5 border border-accent/20">
+                        <div className="flex items-center gap-3">
+                          <div className="h-12 w-12 rounded-lg bg-accent/20 flex items-center justify-center">
+                            <Icon name="Flame" className="text-accent" size={24} />
+                          </div>
+                          <div>
+                            <div className="font-bold text-xl">892 МВт</div>
+                            <div className="text-sm text-muted-foreground">ТЭЦ на угле</div>
+                          </div>
+                        </div>
+                        <div className="text-right">
+                          <div className="text-sm font-medium text-muted-foreground">-2%</div>
+                          <div className="text-xs text-muted-foreground">за месяц</div>
+                        </div>
                       </div>
-                    </div>
-                    <div className="text-right">
-                      <div className="text-sm font-medium text-accent">+8%</div>
-                      <div className="text-xs text-muted-foreground">за месяц</div>
-                    </div>
-                  </div>
+
+                      <div className="flex items-center justify-between p-4 rounded-lg bg-gradient-to-r from-primary/10 to-primary/5 border border-primary/20">
+                        <div className="flex items-center gap-3">
+                          <div className="h-12 w-12 rounded-lg bg-primary/20 flex items-center justify-center">
+                            <Icon name="Zap" className="text-primary" size={24} />
+                          </div>
+                          <div>
+                            <div className="font-bold text-xl">709 МВт</div>
+                            <div className="text-sm text-muted-foreground">Газовые станции</div>
+                          </div>
+                        </div>
+                        <div className="text-right">
+                          <div className="text-sm font-medium text-muted-foreground">0%</div>
+                          <div className="text-xs text-muted-foreground">за месяц</div>
+                        </div>
+                      </div>
+                    </>
+                  )}
                 </CardContent>
               </Card>
             </div>
