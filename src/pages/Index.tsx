@@ -673,35 +673,66 @@ const Index = () => {
                   <Icon name="BarChart3" className="text-primary" size={20} />
                   Интегральная эффективность систем
                 </CardTitle>
-                <CardDescription>Показатели работы всех блоков экосистемы за 24 часа</CardDescription>
+                <CardDescription>Данные собираются с IoT-датчиков, систем мониторинга и ERP-платформ в реальном времени</CardDescription>
               </CardHeader>
               <CardContent>
+                <div className="mb-4 p-3 rounded-lg bg-muted/50 border border-muted-foreground/20">
+                  <div className="flex items-start gap-2">
+                    <Icon name="Info" className="text-primary mt-0.5 flex-shrink-0" size={18} />
+                    <div className="text-sm text-muted-foreground">
+                      <span className="font-medium text-foreground">Источники данных:</span> Телеметрия с месторождений, SCADA-системы энергообъектов, 
+                      GPS-трекеры транспорта, экологические датчики качества воздуха и воды. Агрегация каждые 15 минут.
+                    </div>
+                  </div>
+                </div>
                 <ResponsiveContainer width="100%" height={350}>
                   <LineChart data={analyticsData}>
                     <CartesianGrid strokeDasharray="3 3" className="stroke-muted" />
                     <XAxis dataKey="period" className="text-xs" />
-                    <YAxis className="text-xs" />
+                    <YAxis className="text-xs" label={{ value: 'Эффективность (%)', angle: -90, position: 'insideLeft', style: { fontSize: 12 } }} />
                     <Tooltip 
                       contentStyle={{ 
                         backgroundColor: 'hsl(var(--card))', 
                         border: '1px solid hsl(var(--border))',
                         borderRadius: '8px'
-                      }} 
+                      }}
+                      formatter={(value: any) => [`${value}%`, '']}
                     />
-                    <Line type="monotone" dataKey="недра" stroke="hsl(var(--primary))" strokeWidth={2} />
-                    <Line type="monotone" dataKey="логистика" stroke="hsl(var(--accent))" strokeWidth={2} />
-                    <Line type="monotone" dataKey="энергетика" stroke="hsl(var(--secondary))" strokeWidth={2} />
-                    <Line type="monotone" dataKey="экология" stroke="#00A86B" strokeWidth={2} />
+                    <Line type="monotone" dataKey="недра" stroke="hsl(var(--primary))" strokeWidth={2} name="Недра" />
+                    <Line type="monotone" dataKey="логистика" stroke="hsl(var(--accent))" strokeWidth={2} name="Логистика" />
+                    <Line type="monotone" dataKey="энергетика" stroke="hsl(var(--secondary))" strokeWidth={2} name="Энергетика" />
+                    <Line type="monotone" dataKey="экология" stroke="#00A86B" strokeWidth={2} name="Экология" />
                   </LineChart>
                 </ResponsiveContainer>
+                <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mt-4 pt-4 border-t">
+                  <div className="flex items-center gap-2">
+                    <div className="h-3 w-3 rounded-full" style={{ backgroundColor: 'hsl(var(--primary))' }}></div>
+                    <span className="text-xs text-muted-foreground">Недра — телеметрия скважин</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <div className="h-3 w-3 rounded-full" style={{ backgroundColor: 'hsl(var(--accent))' }}></div>
+                    <span className="text-xs text-muted-foreground">Логистика — GPS грузов</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <div className="h-3 w-3 rounded-full" style={{ backgroundColor: 'hsl(var(--secondary))' }}></div>
+                    <span className="text-xs text-muted-foreground">Энергетика — SCADA</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <div className="h-3 w-3 rounded-full" style={{ backgroundColor: '#00A86B' }}></div>
+                    <span className="text-xs text-muted-foreground">Экология — датчики воздуха</span>
+                  </div>
+                </div>
               </CardContent>
             </Card>
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-              <Card className="border-l-4 border-l-primary">
+              <Card className="border-l-4 border-l-primary group hover:shadow-lg transition-all">
                 <CardHeader className="pb-3">
                   <div className="flex items-center justify-between">
-                    <CardTitle className="text-base">Блок «Недра»</CardTitle>
+                    <CardTitle className="text-base flex items-center gap-2">
+                      Блок «Недра»
+                      <Icon name="HelpCircle" className="text-muted-foreground opacity-0 group-hover:opacity-100 transition-opacity" size={14} />
+                    </CardTitle>
                     <Icon name="Mountain" className="text-primary" size={20} />
                   </div>
                 </CardHeader>
@@ -712,13 +743,19 @@ const Index = () => {
                     <Icon name="TrendingUp" size={16} className="text-secondary" />
                     <span className="text-secondary font-medium">+3% за сутки</span>
                   </div>
+                  <div className="pt-2 mt-2 border-t opacity-0 group-hover:opacity-100 transition-opacity">
+                    <p className="text-xs text-muted-foreground">📡 247 скважин • 1,284 датчика добычи</p>
+                  </div>
                 </CardContent>
               </Card>
 
-              <Card className="border-l-4 border-l-accent">
+              <Card className="border-l-4 border-l-accent group hover:shadow-lg transition-all">
                 <CardHeader className="pb-3">
                   <div className="flex items-center justify-between">
-                    <CardTitle className="text-base">Блок «Логистика»</CardTitle>
+                    <CardTitle className="text-base flex items-center gap-2">
+                      Блок «Логистика»
+                      <Icon name="HelpCircle" className="text-muted-foreground opacity-0 group-hover:opacity-100 transition-opacity" size={14} />
+                    </CardTitle>
                     <Icon name="Package" className="text-accent" size={20} />
                   </div>
                 </CardHeader>
@@ -729,13 +766,19 @@ const Index = () => {
                     <Icon name="TrendingUp" size={16} className="text-secondary" />
                     <span className="text-secondary font-medium">+1% за сутки</span>
                   </div>
+                  <div className="pt-2 mt-2 border-t opacity-0 group-hover:opacity-100 transition-opacity">
+                    <p className="text-xs text-muted-foreground">🚚 1,284 транспорта • GPS каждые 5 мин</p>
+                  </div>
                 </CardContent>
               </Card>
 
-              <Card className="border-l-4 border-l-secondary">
+              <Card className="border-l-4 border-l-secondary group hover:shadow-lg transition-all">
                 <CardHeader className="pb-3">
                   <div className="flex items-center justify-between">
-                    <CardTitle className="text-base">Блок «Энергетика»</CardTitle>
+                    <CardTitle className="text-base flex items-center gap-2">
+                      Блок «Энергетика»
+                      <Icon name="HelpCircle" className="text-muted-foreground opacity-0 group-hover:opacity-100 transition-opacity" size={14} />
+                    </CardTitle>
                     <Icon name="Zap" className="text-secondary" size={20} />
                   </div>
                 </CardHeader>
@@ -746,13 +789,19 @@ const Index = () => {
                     <Icon name="TrendingUp" size={16} className="text-secondary" />
                     <span className="text-secondary font-medium">+2% за сутки</span>
                   </div>
+                  <div className="pt-2 mt-2 border-t opacity-0 group-hover:opacity-100 transition-opacity">
+                    <p className="text-xs text-muted-foreground">⚡ 87 объектов • SCADA реал-тайм</p>
+                  </div>
                 </CardContent>
               </Card>
 
-              <Card className="border-l-4" style={{ borderLeftColor: '#00A86B' }}>
+              <Card className="border-l-4" style={{ borderLeftColor: '#00A86B' }} className="border-l-4 group hover:shadow-lg transition-all">
                 <CardHeader className="pb-3">
                   <div className="flex items-center justify-between">
-                    <CardTitle className="text-base">Блок «Экология»</CardTitle>
+                    <CardTitle className="text-base flex items-center gap-2">
+                      Блок «Экология»
+                      <Icon name="HelpCircle" className="text-muted-foreground opacity-0 group-hover:opacity-100 transition-opacity" size={14} />
+                    </CardTitle>
                     <Icon name="Leaf" style={{ color: '#00A86B' }} size={20} />
                   </div>
                 </CardHeader>
@@ -762,6 +811,9 @@ const Index = () => {
                   <div className="flex items-center gap-2 text-sm">
                     <Icon name="Minus" size={16} className="text-muted-foreground" />
                     <span className="text-muted-foreground font-medium">Без изменений</span>
+                  </div>
+                  <div className="pt-2 mt-2 border-t opacity-0 group-hover:opacity-100 transition-opacity">
+                    <p className="text-xs text-muted-foreground">🌍 247 датчиков • воздух + вода</p>
                   </div>
                 </CardContent>
               </Card>
