@@ -119,7 +119,7 @@ const Index = () => {
         </div>
 
         <Tabs value={activeTab} onValueChange={setActiveTab} className="space-y-6">
-          <TabsList className="grid w-full md:w-auto md:inline-grid grid-cols-4 h-auto p-1">
+          <TabsList className="grid w-full md:w-auto md:inline-grid grid-cols-5 h-auto p-1">
             <TabsTrigger value="logistics" className="gap-2 px-6 py-3">
               <Icon name="Package" size={18} />
               Логистика
@@ -127,6 +127,10 @@ const Index = () => {
             <TabsTrigger value="energy" className="gap-2 px-6 py-3">
               <Icon name="Zap" size={18} />
               Энергетика
+            </TabsTrigger>
+            <TabsTrigger value="ecology" className="gap-2 px-6 py-3">
+              <Icon name="Leaf" size={18} />
+              Экология
             </TabsTrigger>
             <TabsTrigger value="analytics" className="gap-2 px-6 py-3">
               <Icon name="BarChart3" size={18} />
@@ -478,6 +482,190 @@ const Index = () => {
             </Card>
           </TabsContent>
 
+          <TabsContent value="ecology" className="space-y-6 animate-fade-in">
+            <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+              <Card className="hover:shadow-lg transition-shadow">
+                <CardHeader className="pb-3">
+                  <div className="flex items-center justify-between">
+                    <Icon name="Wind" style={{ color: '#00A86B' }} size={24} />
+                    <Badge className="bg-secondary">Норма</Badge>
+                  </div>
+                </CardHeader>
+                <CardContent>
+                  <div className="text-2xl font-bold">18 мкг/м³</div>
+                  <p className="text-sm text-muted-foreground">Качество воздуха</p>
+                </CardContent>
+              </Card>
+
+              <Card className="hover:shadow-lg transition-shadow">
+                <CardHeader className="pb-3">
+                  <div className="flex items-center justify-between">
+                    <Icon name="Droplet" className="text-primary" size={24} />
+                    <Badge className="bg-secondary">Отлично</Badge>
+                  </div>
+                </CardHeader>
+                <CardContent>
+                  <div className="text-2xl font-bold">6.8 pH</div>
+                  <p className="text-sm text-muted-foreground">Качество воды</p>
+                </CardContent>
+              </Card>
+
+              <Card className="hover:shadow-lg transition-shadow">
+                <CardHeader className="pb-3">
+                  <div className="flex items-center justify-between">
+                    <Icon name="Mountain" className="text-accent" size={24} />
+                    <Badge className="bg-secondary">Допустимо</Badge>
+                  </div>
+                </CardHeader>
+                <CardContent>
+                  <div className="text-2xl font-bold">0.8 ПДК</div>
+                  <p className="text-sm text-muted-foreground">Состояние почвы</p>
+                </CardContent>
+              </Card>
+
+              <Card className="hover:shadow-lg transition-shadow">
+                <CardHeader className="pb-3">
+                  <div className="flex items-center justify-between">
+                    <Icon name="Satellite" className="text-secondary" size={24} />
+                    <Badge className="bg-secondary">Активно</Badge>
+                  </div>
+                </CardHeader>
+                <CardContent>
+                  <div className="text-2xl font-bold">247</div>
+                  <p className="text-sm text-muted-foreground">Датчиков онлайн</p>
+                </CardContent>
+              </Card>
+            </div>
+
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+              <Card>
+                <CardHeader>
+                  <CardTitle className="flex items-center gap-2">
+                    <Icon name="Wind" style={{ color: '#00A86B' }} size={20} />
+                    Мониторинг качества воздуха
+                  </CardTitle>
+                  <CardDescription>Динамика показателей по основным загрязнителям</CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <ResponsiveContainer width="100%" height={250}>
+                    <LineChart data={[
+                      { time: '00:00', PM25: 15, PM10: 22, NO2: 18 },
+                      { time: '04:00', PM25: 12, PM10: 19, NO2: 16 },
+                      { time: '08:00', PM25: 18, PM10: 25, NO2: 22 },
+                      { time: '12:00', PM25: 21, PM10: 28, NO2: 24 },
+                      { time: '16:00', PM25: 19, PM10: 26, NO2: 21 },
+                      { time: '20:00', PM25: 16, PM10: 23, NO2: 19 },
+                    ]}>
+                      <CartesianGrid strokeDasharray="3 3" className="stroke-muted" />
+                      <XAxis dataKey="time" className="text-xs" />
+                      <YAxis className="text-xs" />
+                      <Tooltip 
+                        contentStyle={{ 
+                          backgroundColor: 'hsl(var(--card))', 
+                          border: '1px solid hsl(var(--border))',
+                          borderRadius: '8px'
+                        }} 
+                      />
+                      <Line type="monotone" dataKey="PM25" stroke="#00A86B" strokeWidth={2} name="PM2.5" />
+                      <Line type="monotone" dataKey="PM10" stroke="hsl(var(--primary))" strokeWidth={2} name="PM10" />
+                      <Line type="monotone" dataKey="NO2" stroke="hsl(var(--accent))" strokeWidth={2} name="NO₂" />
+                    </LineChart>
+                  </ResponsiveContainer>
+                </CardContent>
+              </Card>
+
+              <Card>
+                <CardHeader>
+                  <CardTitle className="flex items-center gap-2">
+                    <Icon name="MapPin" style={{ color: '#00A86B' }} size={20} />
+                    Датчики мониторинга
+                  </CardTitle>
+                  <CardDescription>Сеть экологического контроля по краю</CardDescription>
+                </CardHeader>
+                <CardContent className="space-y-4">
+                  <div className="flex items-center justify-between p-4 rounded-lg bg-muted/50 hover:bg-muted transition-colors">
+                    <div className="flex items-center gap-3">
+                      <div className="h-10 w-10 rounded-full bg-secondary/20 flex items-center justify-center">
+                        <Icon name="Wind" className="text-secondary" size={20} />
+                      </div>
+                      <div>
+                        <div className="font-medium">Станция «Северная»</div>
+                        <div className="text-sm text-muted-foreground">Норильск • Воздух + Вода</div>
+                      </div>
+                    </div>
+                    <Badge className="bg-secondary">Онлайн</Badge>
+                  </div>
+
+                  <div className="flex items-center justify-between p-4 rounded-lg bg-muted/50 hover:bg-muted transition-colors">
+                    <div className="flex items-center gap-3">
+                      <div className="h-10 w-10 rounded-full bg-secondary/20 flex items-center justify-center">
+                        <Icon name="Droplet" className="text-secondary" size={20} />
+                      </div>
+                      <div>
+                        <div className="font-medium">Станция «Енисей»</div>
+                        <div className="text-sm text-muted-foreground">Красноярск • Вода + Почва</div>
+                      </div>
+                    </div>
+                    <Badge className="bg-secondary">Онлайн</Badge>
+                  </div>
+
+                  <div className="flex items-center justify-between p-4 rounded-lg bg-muted/50 hover:bg-muted transition-colors">
+                    <div className="flex items-center gap-3">
+                      <div className="h-10 w-10 rounded-full bg-accent/20 flex items-center justify-center">
+                        <Icon name="Mountain" className="text-accent" size={20} />
+                      </div>
+                      <div>
+                        <div className="font-medium">Станция «Промышленная»</div>
+                        <div className="text-sm text-muted-foreground">Ачинск • Почва + Воздух</div>
+                      </div>
+                    </div>
+                    <Badge variant="outline">Калибровка</Badge>
+                  </div>
+                </CardContent>
+              </Card>
+            </div>
+
+            <Card>
+              <CardHeader>
+                <CardTitle className="flex items-center gap-2">
+                  <Icon name="Satellite" className="text-primary" size={20} />
+                  Спутниковый мониторинг
+                </CardTitle>
+                <CardDescription>Космический контроль экологической обстановки</CardDescription>
+              </CardHeader>
+              <CardContent>
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                  <div className="p-4 rounded-lg bg-gradient-to-br from-secondary/10 to-secondary/5 border border-secondary/20">
+                    <div className="flex items-center gap-2 mb-2">
+                      <Icon name="TreePine" className="text-secondary" size={20} />
+                      <div className="font-medium">Лесные массивы</div>
+                    </div>
+                    <div className="text-2xl font-bold mb-1">94.2%</div>
+                    <p className="text-sm text-muted-foreground">Площадь покрытия</p>
+                  </div>
+
+                  <div className="p-4 rounded-lg bg-gradient-to-br from-accent/10 to-accent/5 border border-accent/20">
+                    <div className="flex items-center gap-2 mb-2">
+                      <Icon name="Flame" className="text-accent" size={20} />
+                      <div className="font-medium">Очаги возгорания</div>
+                    </div>
+                    <div className="text-2xl font-bold mb-1">3</div>
+                    <p className="text-sm text-muted-foreground">Активных точки</p>
+                  </div>
+
+                  <div className="p-4 rounded-lg bg-gradient-to-br from-primary/10 to-primary/5 border border-primary/20">
+                    <div className="flex items-center gap-2 mb-2">
+                      <Icon name="CloudRain" className="text-primary" size={20} />
+                      <div className="font-medium">Водные объекты</div>
+                    </div>
+                    <div className="text-2xl font-bold mb-1">127</div>
+                    <p className="text-sm text-muted-foreground">Под контролем</p>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+          </TabsContent>
+
           <TabsContent value="analytics" className="space-y-6 animate-fade-in">
             <Card>
               <CardHeader>
@@ -743,6 +931,153 @@ const Index = () => {
                 </CardContent>
               </Card>
             </div>
+
+            <Card>
+              <CardHeader>
+                <CardTitle className="flex items-center gap-2">
+                  <Icon name="Bot" className="text-secondary" size={20} />
+                  ИИ-ассистенты ЦЭНК
+                </CardTitle>
+                <CardDescription>Искусственный интеллект для анализа и управления экосистемой</CardDescription>
+              </CardHeader>
+              <CardContent>
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+                  <div className="p-5 rounded-lg bg-gradient-to-br from-secondary/10 via-primary/5 to-accent/5 border-2 border-secondary/30 hover:border-secondary/50 transition-all">
+                    <div className="flex items-center gap-3 mb-4">
+                      <div className="h-12 w-12 rounded-lg bg-gradient-to-br from-secondary to-primary flex items-center justify-center">
+                        <Icon name="Brain" className="text-white" size={24} />
+                      </div>
+                      <div>
+                        <div className="font-bold text-lg">ГеоИИ</div>
+                        <div className="text-sm text-muted-foreground">Аналитика недропользования</div>
+                      </div>
+                    </div>
+                    <div className="space-y-2 text-sm">
+                      <div className="flex items-center gap-2">
+                        <Icon name="CheckCircle2" className="text-secondary" size={16} />
+                        <span>Прогноз запасов месторождений</span>
+                      </div>
+                      <div className="flex items-center gap-2">
+                        <Icon name="CheckCircle2" className="text-secondary" size={16} />
+                        <span>Оптимизация добычи на основе данных</span>
+                      </div>
+                      <div className="flex items-center gap-2">
+                        <Icon name="CheckCircle2" className="text-secondary" size={16} />
+                        <span>Предиктивное обслуживание оборудования</span>
+                      </div>
+                    </div>
+                    <div className="mt-4 pt-4 border-t flex items-center justify-between">
+                      <Badge className="bg-secondary">Активен</Badge>
+                      <span className="text-xs text-muted-foreground">Обработано: 2.4М записей</span>
+                    </div>
+                  </div>
+
+                  <div className="p-5 rounded-lg bg-gradient-to-br from-primary/10 via-secondary/5 to-primary/5 border-2 border-primary/30 hover:border-primary/50 transition-all">
+                    <div className="flex items-center gap-3 mb-4">
+                      <div className="h-12 w-12 rounded-lg bg-gradient-to-br from-primary to-secondary flex items-center justify-center">
+                        <Icon name="Zap" className="text-white" size={24} />
+                      </div>
+                      <div>
+                        <div className="font-bold text-lg">ЭнергоИИ</div>
+                        <div className="text-sm text-muted-foreground">Управление энергосистемами</div>
+                      </div>
+                    </div>
+                    <div className="space-y-2 text-sm">
+                      <div className="flex items-center gap-2">
+                        <Icon name="CheckCircle2" className="text-primary" size={16} />
+                        <span>Балансировка нагрузки сети</span>
+                      </div>
+                      <div className="flex items-center gap-2">
+                        <Icon name="CheckCircle2" className="text-primary" size={16} />
+                        <span>Прогноз выработки ВИЭ</span>
+                      </div>
+                      <div className="flex items-center gap-2">
+                        <Icon name="CheckCircle2" className="text-primary" size={16} />
+                        <span>Оптимизация энергопотребления</span>
+                      </div>
+                    </div>
+                    <div className="mt-4 pt-4 border-t flex items-center justify-between">
+                      <Badge className="bg-primary">Активен</Badge>
+                      <span className="text-xs text-muted-foreground">Экономия: 12% энергии</span>
+                    </div>
+                  </div>
+
+                  <div className="p-5 rounded-lg bg-gradient-to-br from-accent/10 via-secondary/5 to-accent/5 border-2 border-accent/30 hover:border-accent/50 transition-all">
+                    <div className="flex items-center gap-3 mb-4">
+                      <div className="h-12 w-12 rounded-lg bg-gradient-to-br from-accent to-primary flex items-center justify-center">
+                        <Icon name="Route" className="text-white" size={24} />
+                      </div>
+                      <div>
+                        <div className="font-bold text-lg">ЛогистИИ</div>
+                        <div className="text-sm text-muted-foreground">Оптимизация грузопотоков</div>
+                      </div>
+                    </div>
+                    <div className="space-y-2 text-sm">
+                      <div className="flex items-center gap-2">
+                        <Icon name="CheckCircle2" className="text-accent" size={16} />
+                        <span>Умная маршрутизация транспорта</span>
+                      </div>
+                      <div className="flex items-center gap-2">
+                        <Icon name="CheckCircle2" className="text-accent" size={16} />
+                        <span>Прогноз загрузки каналов</span>
+                      </div>
+                      <div className="flex items-center gap-2">
+                        <Icon name="CheckCircle2" className="text-accent" size={16} />
+                        <span>Автоматическое планирование доставок</span>
+                      </div>
+                    </div>
+                    <div className="mt-4 pt-4 border-t flex items-center justify-between">
+                      <Badge className="bg-accent">Активен</Badge>
+                      <span className="text-xs text-muted-foreground">Снижение времени: 18%</span>
+                    </div>
+                  </div>
+
+                  <div className="p-5 rounded-lg bg-gradient-to-br from-secondary/10 via-accent/5 to-secondary/5 border-2 border-secondary/30 hover:border-secondary/50 transition-all">
+                    <div className="flex items-center gap-3 mb-4">
+                      <div className="h-12 w-12 rounded-lg bg-gradient-to-br from-secondary via-primary to-accent flex items-center justify-center">
+                        <Icon name="Leaf" className="text-white" size={24} />
+                      </div>
+                      <div>
+                        <div className="font-bold text-lg">ЭкоИИ</div>
+                        <div className="text-sm text-muted-foreground">Экологический мониторинг</div>
+                      </div>
+                    </div>
+                    <div className="space-y-2 text-sm">
+                      <div className="flex items-center gap-2">
+                        <Icon name="CheckCircle2" style={{ color: '#00A86B' }} size={16} />
+                        <span>Анализ качества воздуха и воды</span>
+                      </div>
+                      <div className="flex items-center gap-2">
+                        <Icon name="CheckCircle2" style={{ color: '#00A86B' }} size={16} />
+                        <span>Раннее предупреждение об инцидентах</span>
+                      </div>
+                      <div className="flex items-center gap-2">
+                        <Icon name="CheckCircle2" style={{ color: '#00A86B' }} size={16} />
+                        <span>Спутниковая аналитика территорий</span>
+                      </div>
+                    </div>
+                    <div className="mt-4 pt-4 border-t flex items-center justify-between">
+                      <Badge className="bg-secondary">Активен</Badge>
+                      <span className="text-xs text-muted-foreground">247 датчиков онлайн</span>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="mt-6 p-4 rounded-lg bg-muted/50 border">
+                  <div className="flex items-start gap-3">
+                    <Icon name="Info" className="text-primary mt-0.5" size={20} />
+                    <div className="space-y-1">
+                      <div className="font-medium">Интеграция с экосистемой</div>
+                      <p className="text-sm text-muted-foreground">
+                        Все ИИ-ассистенты работают на базе единой платформы машинного обучения и обмениваются данными 
+                        для комплексной оптимизации всей цифровой экосистемы. Модели обучаются на исторических данных 
+                        ЦЭНК и постоянно совершенствуются.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
 
             <Card>
               <CardHeader>
