@@ -119,7 +119,7 @@ const Index = () => {
         </div>
 
         <Tabs value={activeTab} onValueChange={setActiveTab} className="space-y-6">
-          <TabsList className="grid w-full md:w-auto md:inline-grid grid-cols-3 h-auto p-1">
+          <TabsList className="grid w-full md:w-auto md:inline-grid grid-cols-4 h-auto p-1">
             <TabsTrigger value="logistics" className="gap-2 px-6 py-3">
               <Icon name="Package" size={18} />
               Логистика
@@ -131,6 +131,10 @@ const Index = () => {
             <TabsTrigger value="analytics" className="gap-2 px-6 py-3">
               <Icon name="BarChart3" size={18} />
               Аналитика
+            </TabsTrigger>
+            <TabsTrigger value="staff" className="gap-2 px-6 py-3">
+              <Icon name="Users" size={18} />
+              Кадры
             </TabsTrigger>
           </TabsList>
 
@@ -575,29 +579,201 @@ const Index = () => {
               </Card>
             </div>
 
+          </TabsContent>
+
+          <TabsContent value="staff" className="space-y-6 animate-fade-in">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+              <Card className="hover:shadow-lg transition-shadow">
+                <CardHeader className="pb-3">
+                  <div className="flex items-center justify-between">
+                    <Icon name="Users" className="text-primary" size={24} />
+                    <Badge variant="secondary">Активные</Badge>
+                  </div>
+                </CardHeader>
+                <CardContent>
+                  <div className="text-3xl font-bold">12,847</div>
+                  <p className="text-sm text-muted-foreground">Специалистов в базе</p>
+                </CardContent>
+              </Card>
+
+              <Card className="hover:shadow-lg transition-shadow">
+                <CardHeader className="pb-3">
+                  <div className="flex items-center justify-between">
+                    <Icon name="Briefcase" className="text-accent" size={24} />
+                    <Badge className="bg-accent">Горячие</Badge>
+                  </div>
+                </CardHeader>
+                <CardContent>
+                  <div className="text-3xl font-bold">342</div>
+                  <p className="text-sm text-muted-foreground">Открытых вакансий</p>
+                </CardContent>
+              </Card>
+
+              <Card className="hover:shadow-lg transition-shadow">
+                <CardHeader className="pb-3">
+                  <div className="flex items-center justify-between">
+                    <Icon name="GraduationCap" className="text-secondary" size={24} />
+                    <Badge className="bg-secondary">Доступно</Badge>
+                  </div>
+                </CardHeader>
+                <CardContent>
+                  <div className="text-3xl font-bold">67</div>
+                  <p className="text-sm text-muted-foreground">Курсов повышения</p>
+                </CardContent>
+              </Card>
+            </div>
+
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+              <Card>
+                <CardHeader>
+                  <CardTitle className="flex items-center gap-2">
+                    <Icon name="Briefcase" className="text-accent" size={20} />
+                    Актуальные вакансии
+                  </CardTitle>
+                  <CardDescription>Самые востребованные позиции</CardDescription>
+                </CardHeader>
+                <CardContent className="space-y-4">
+                  <div className="flex items-center justify-between p-4 rounded-lg bg-muted/50 hover:bg-muted transition-colors">
+                    <div className="flex items-center gap-3">
+                      <div className="h-10 w-10 rounded-full bg-primary/20 flex items-center justify-center">
+                        <Icon name="HardHat" className="text-primary" size={20} />
+                      </div>
+                      <div>
+                        <div className="font-medium">Инженер-геолог</div>
+                        <div className="text-sm text-muted-foreground">Норильск • От 180,000 ₽</div>
+                      </div>
+                    </div>
+                    <Badge className="bg-accent">23 заявки</Badge>
+                  </div>
+
+                  <div className="flex items-center justify-between p-4 rounded-lg bg-muted/50 hover:bg-muted transition-colors">
+                    <div className="flex items-center gap-3">
+                      <div className="h-10 w-10 rounded-full bg-secondary/20 flex items-center justify-center">
+                        <Icon name="Zap" className="text-secondary" size={20} />
+                      </div>
+                      <div>
+                        <div className="font-medium">Электромонтёр ВИЭ</div>
+                        <div className="text-sm text-muted-foreground">Красноярск • От 120,000 ₽</div>
+                      </div>
+                    </div>
+                    <Badge className="bg-accent">18 заявок</Badge>
+                  </div>
+
+                  <div className="flex items-center justify-between p-4 rounded-lg bg-muted/50 hover:bg-muted transition-colors">
+                    <div className="flex items-center gap-3">
+                      <div className="h-10 w-10 rounded-full bg-accent/20 flex items-center justify-center">
+                        <Icon name="TrendingUp" className="text-accent" size={20} />
+                      </div>
+                      <div>
+                        <div className="font-medium">Аналитик данных</div>
+                        <div className="text-sm text-muted-foreground">Удалённо • От 140,000 ₽</div>
+                      </div>
+                    </div>
+                    <Badge className="bg-accent">31 заявка</Badge>
+                  </div>
+
+                  <div className="flex items-center justify-between p-4 rounded-lg bg-muted/50 hover:bg-muted transition-colors">
+                    <div className="flex items-center gap-3">
+                      <div className="h-10 w-10 rounded-full bg-primary/20 flex items-center justify-center">
+                        <Icon name="Truck" className="text-primary" size={20} />
+                      </div>
+                      <div>
+                        <div className="font-medium">Логист</div>
+                        <div className="text-sm text-muted-foreground">Канск • От 95,000 ₽</div>
+                      </div>
+                    </div>
+                    <Badge className="bg-accent">12 заявок</Badge>
+                  </div>
+                </CardContent>
+              </Card>
+
+              <Card>
+                <CardHeader>
+                  <CardTitle className="flex items-center gap-2">
+                    <Icon name="GraduationCap" className="text-secondary" size={20} />
+                    Популярные курсы
+                  </CardTitle>
+                  <CardDescription>Программы повышения квалификации</CardDescription>
+                </CardHeader>
+                <CardContent className="space-y-4">
+                  <div className="p-4 rounded-lg bg-gradient-to-r from-secondary/10 to-secondary/5 border border-secondary/20">
+                    <div className="flex items-center gap-3 mb-2">
+                      <Icon name="Leaf" className="text-secondary" size={20} />
+                      <div className="font-medium">Эксплуатация объектов ВИЭ</div>
+                    </div>
+                    <div className="text-sm text-muted-foreground mb-3">72 часа • СибГУ им. Решетнёва</div>
+                    <div className="flex items-center justify-between">
+                      <div className="text-sm">
+                        <span className="font-medium">47 из 60</span>
+                        <span className="text-muted-foreground"> участников</span>
+                      </div>
+                      <Progress value={78} className="w-24 [&>div]:bg-secondary" />
+                    </div>
+                  </div>
+
+                  <div className="p-4 rounded-lg bg-gradient-to-r from-primary/10 to-primary/5 border border-primary/20">
+                    <div className="flex items-center gap-3 mb-2">
+                      <Icon name="HardHat" className="text-primary" size={20} />
+                      <div className="font-medium">Промышленная безопасность</div>
+                    </div>
+                    <div className="text-sm text-muted-foreground mb-3">40 часов • КрасГАУ</div>
+                    <div className="flex items-center justify-between">
+                      <div className="text-sm">
+                        <span className="font-medium">35 из 40</span>
+                        <span className="text-muted-foreground"> участников</span>
+                      </div>
+                      <Progress value={88} className="w-24 [&>div]:bg-primary" />
+                    </div>
+                  </div>
+
+                  <div className="p-4 rounded-lg bg-gradient-to-r from-accent/10 to-accent/5 border border-accent/20">
+                    <div className="flex items-center gap-3 mb-2">
+                      <Icon name="BarChart3" className="text-accent" size={20} />
+                      <div className="font-medium">Анализ данных в энергетике</div>
+                    </div>
+                    <div className="text-sm text-muted-foreground mb-3">56 часов • СФУ</div>
+                    <div className="flex items-center justify-between">
+                      <div className="text-sm">
+                        <span className="font-medium">28 из 50</span>
+                        <span className="text-muted-foreground"> участников</span>
+                      </div>
+                      <Progress value={56} className="w-24 [&>div]:bg-accent" />
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+            </div>
+
             <Card>
               <CardHeader>
                 <CardTitle className="flex items-center gap-2">
                   <Icon name="Users" className="text-primary" size={20} />
-                  Блок «Кадры»
+                  Распределение специалистов
                 </CardTitle>
-                <CardDescription>Специалисты и образовательные программы</CardDescription>
+                <CardDescription>По направлениям деятельности</CardDescription>
               </CardHeader>
               <CardContent>
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                  <div className="p-4 rounded-lg bg-muted/50">
-                    <div className="text-2xl font-bold">12,847</div>
-                    <p className="text-sm text-muted-foreground">Специалистов в базе</p>
-                  </div>
-                  <div className="p-4 rounded-lg bg-muted/50">
-                    <div className="text-2xl font-bold">342</div>
-                    <p className="text-sm text-muted-foreground">Открытых вакансий</p>
-                  </div>
-                  <div className="p-4 rounded-lg bg-muted/50">
-                    <div className="text-2xl font-bold">67</div>
-                    <p className="text-sm text-muted-foreground">Курсов повышения</p>
-                  </div>
-                </div>
+                <ResponsiveContainer width="100%" height={200}>
+                  <BarChart data={[
+                    { name: 'Геология/Недра', value: 3842 },
+                    { name: 'Энергетика', value: 2934 },
+                    { name: 'Логистика', value: 2156 },
+                    { name: 'Экология', value: 1847 },
+                    { name: 'Аналитика', value: 2068 },
+                  ]}>
+                    <CartesianGrid strokeDasharray="3 3" className="stroke-muted" />
+                    <XAxis dataKey="name" className="text-xs" />
+                    <YAxis className="text-xs" />
+                    <Tooltip 
+                      contentStyle={{ 
+                        backgroundColor: 'hsl(var(--card))', 
+                        border: '1px solid hsl(var(--border))',
+                        borderRadius: '8px'
+                      }} 
+                    />
+                    <Bar dataKey="value" fill="hsl(var(--primary))" radius={[8, 8, 0, 0]} />
+                  </BarChart>
+                </ResponsiveContainer>
               </CardContent>
             </Card>
           </TabsContent>
