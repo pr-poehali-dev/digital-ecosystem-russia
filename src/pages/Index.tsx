@@ -23,12 +23,12 @@ const logisticsData = [
 ];
 
 const analyticsData = [
-  { period: '00:00', недра: 82, логистика: 65, энергетика: 78, экология: 91 },
-  { period: '04:00', недра: 85, логистика: 71, энергетика: 82, экология: 89 },
-  { period: '08:00', недра: 91, логистика: 78, энергетика: 88, экология: 86 },
-  { period: '12:00', недра: 88, логистика: 85, энергетика: 92, экология: 84 },
-  { period: '16:00', недра: 93, логистика: 82, энергетика: 89, экология: 87 },
-  { period: '20:00', недра: 87, логистика: 75, энергетика: 85, экология: 90 },
+  { month: 'Янв', недра: 4200, логистика: 3100, энергетика: 5400, экология: 280 },
+  { month: 'Фев', недра: 4600, логистика: 3400, энергетика: 5700, экология: 295 },
+  { month: 'Мар', недра: 5100, логистика: 3800, энергетика: 6200, экология: 310 },
+  { month: 'Апр', недра: 4900, логистика: 4100, энергетика: 6500, экология: 305 },
+  { month: 'Май', недра: 5400, логистика: 4500, энергетика: 6800, экология: 320 },
+  { month: 'Июн', недра: 5800, логистика: 4800, энергетика: 7100, экология: 335 },
 ];
 
 const Index = () => {
@@ -670,8 +670,8 @@ const Index = () => {
             <Card>
               <CardHeader>
                 <CardTitle className="flex items-center gap-2">
-                  <Icon name="BarChart3" className="text-primary" size={20} />
-                  Интегральная эффективность систем
+                  <Icon name="TrendingUp" className="text-primary" size={20} />
+                  Динамика показателей экосистемы
                 </CardTitle>
                 <CardDescription>Данные собираются с IoT-датчиков, систем мониторинга и ERP-платформ в реальном времени</CardDescription>
               </CardHeader>
@@ -680,46 +680,55 @@ const Index = () => {
                   <div className="flex items-start gap-2">
                     <Icon name="Info" className="text-primary mt-0.5 flex-shrink-0" size={18} />
                     <div className="text-sm text-muted-foreground">
-                      <span className="font-medium text-foreground">Источники данных:</span> Телеметрия с месторождений, SCADA-системы энергообъектов, 
-                      GPS-трекеры транспорта, экологические датчики качества воздуха и воды. Агрегация каждые 15 минут.
+                      <span className="font-medium text-foreground">Источники данных:</span> Телеметрия с месторождений (тыс. тонн), 
+                      GPS-трекеры транспорта (тыс. рейсов), SCADA энергообъектов (МВт·ч), датчики экологии (индекс качества). 
+                      Обновление ежедневно.
                     </div>
                   </div>
                 </div>
                 <ResponsiveContainer width="100%" height={350}>
-                  <LineChart data={analyticsData}>
+                  <AreaChart data={analyticsData}>
+                    <defs>
+                      <linearGradient id="colorНедра" x1="0" y1="0" x2="0" y2="1">
+                        <stop offset="5%" stopColor="hsl(var(--primary))" stopOpacity={0.3}/>
+                        <stop offset="95%" stopColor="hsl(var(--primary))" stopOpacity={0}/>
+                      </linearGradient>
+                      <linearGradient id="colorЛогистика" x1="0" y1="0" x2="0" y2="1">
+                        <stop offset="5%" stopColor="hsl(var(--accent))" stopOpacity={0.3}/>
+                        <stop offset="95%" stopColor="hsl(var(--accent))" stopOpacity={0}/>
+                      </linearGradient>
+                      <linearGradient id="colorЭнергетика" x1="0" y1="0" x2="0" y2="1">
+                        <stop offset="5%" stopColor="hsl(var(--secondary))" stopOpacity={0.3}/>
+                        <stop offset="95%" stopColor="hsl(var(--secondary))" stopOpacity={0}/>
+                      </linearGradient>
+                    </defs>
                     <CartesianGrid strokeDasharray="3 3" className="stroke-muted" />
-                    <XAxis dataKey="period" className="text-xs" />
-                    <YAxis className="text-xs" label={{ value: 'Эффективность (%)', angle: -90, position: 'insideLeft', style: { fontSize: 12 } }} />
+                    <XAxis dataKey="month" className="text-xs" />
+                    <YAxis className="text-xs" />
                     <Tooltip 
                       contentStyle={{ 
                         backgroundColor: 'hsl(var(--card))', 
                         border: '1px solid hsl(var(--border))',
                         borderRadius: '8px'
                       }}
-                      formatter={(value: any) => [`${value}%`, '']}
                     />
-                    <Line type="monotone" dataKey="недра" stroke="hsl(var(--primary))" strokeWidth={2} name="Недра" />
-                    <Line type="monotone" dataKey="логистика" stroke="hsl(var(--accent))" strokeWidth={2} name="Логистика" />
-                    <Line type="monotone" dataKey="энергетика" stroke="hsl(var(--secondary))" strokeWidth={2} name="Энергетика" />
-                    <Line type="monotone" dataKey="экология" stroke="#00A86B" strokeWidth={2} name="Экология" />
-                  </LineChart>
+                    <Area type="monotone" dataKey="недра" stroke="hsl(var(--primary))" fillOpacity={1} fill="url(#colorНедра)" strokeWidth={2} name="Добыча (тыс. т)" />
+                    <Area type="monotone" dataKey="логистика" stroke="hsl(var(--accent))" fillOpacity={1} fill="url(#colorЛогистика)" strokeWidth={2} name="Перевозки (тыс. рейсов)" />
+                    <Area type="monotone" dataKey="энергетика" stroke="hsl(var(--secondary))" fillOpacity={1} fill="url(#colorЭнергетика)" strokeWidth={2} name="Энергия (МВт·ч)" />
+                  </AreaChart>
                 </ResponsiveContainer>
-                <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mt-4 pt-4 border-t">
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-3 mt-4 pt-4 border-t">
                   <div className="flex items-center gap-2">
                     <div className="h-3 w-3 rounded-full" style={{ backgroundColor: 'hsl(var(--primary))' }}></div>
-                    <span className="text-xs text-muted-foreground">Недра — телеметрия скважин</span>
+                    <span className="text-xs text-muted-foreground">Добыча полезных ископаемых (тыс. тонн)</span>
                   </div>
                   <div className="flex items-center gap-2">
                     <div className="h-3 w-3 rounded-full" style={{ backgroundColor: 'hsl(var(--accent))' }}></div>
-                    <span className="text-xs text-muted-foreground">Логистика — GPS грузов</span>
+                    <span className="text-xs text-muted-foreground">Логистические перевозки (тыс. рейсов)</span>
                   </div>
                   <div className="flex items-center gap-2">
                     <div className="h-3 w-3 rounded-full" style={{ backgroundColor: 'hsl(var(--secondary))' }}></div>
-                    <span className="text-xs text-muted-foreground">Энергетика — SCADA</span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <div className="h-3 w-3 rounded-full" style={{ backgroundColor: '#00A86B' }}></div>
-                    <span className="text-xs text-muted-foreground">Экология — датчики воздуха</span>
+                    <span className="text-xs text-muted-foreground">Производство энергии (МВт·ч)</span>
                   </div>
                 </div>
               </CardContent>
