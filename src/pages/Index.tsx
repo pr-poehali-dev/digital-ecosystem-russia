@@ -849,28 +849,54 @@ const Index = () => {
 
                   <div className="flex items-center justify-between p-4 rounded-lg bg-muted/50 hover:bg-muted transition-colors">
                     <div className="flex items-center gap-3">
-                      <div className="h-10 w-10 rounded-full bg-accent/20 flex items-center justify-center">
-                        <Icon name="TrendingUp" className="text-accent" size={20} />
+                      <div className="h-10 w-10 rounded-full bg-secondary/20 flex items-center justify-center">
+                        <Icon name="Brain" className="text-secondary" size={20} />
                       </div>
                       <div>
-                        <div className="font-medium">Аналитик данных</div>
-                        <div className="text-sm text-muted-foreground">Удалённо • От 140,000 ₽</div>
+                        <div className="font-medium">Инженер ML/AI</div>
+                        <div className="text-sm text-muted-foreground">Красноярск • От 220,000 ₽</div>
                       </div>
                     </div>
-                    <Badge className="bg-accent">31 заявка</Badge>
+                    <Badge className="bg-accent">15 заявок</Badge>
+                  </div>
+
+                  <div className="flex items-center justify-between p-4 rounded-lg bg-muted/50 hover:bg-muted transition-colors">
+                    <div className="flex items-center gap-3">
+                      <div className="h-10 w-10 rounded-full bg-accent/20 flex items-center justify-center">
+                        <Icon name="Database" className="text-accent" size={20} />
+                      </div>
+                      <div>
+                        <div className="font-medium">Data Scientist</div>
+                        <div className="text-sm text-muted-foreground">Удалённо • От 180,000 ₽</div>
+                      </div>
+                    </div>
+                    <Badge className="bg-accent">22 заявки</Badge>
                   </div>
 
                   <div className="flex items-center justify-between p-4 rounded-lg bg-muted/50 hover:bg-muted transition-colors">
                     <div className="flex items-center gap-3">
                       <div className="h-10 w-10 rounded-full bg-primary/20 flex items-center justify-center">
-                        <Icon name="Truck" className="text-primary" size={20} />
+                        <Icon name="Workflow" className="text-primary" size={20} />
                       </div>
                       <div>
-                        <div className="font-medium">Логист</div>
-                        <div className="text-sm text-muted-foreground">Канск • От 95,000 ₽</div>
+                        <div className="font-medium">MLOps-инженер</div>
+                        <div className="text-sm text-muted-foreground">Норильск • От 200,000 ₽</div>
                       </div>
                     </div>
-                    <Badge className="bg-accent">12 заявок</Badge>
+                    <Badge className="bg-accent">9 заявок</Badge>
+                  </div>
+
+                  <div className="flex items-center justify-between p-4 rounded-lg bg-muted/50 hover:bg-muted transition-colors">
+                    <div className="flex items-center gap-3">
+                      <div className="h-10 w-10 rounded-full bg-accent/20 flex items-center justify-center">
+                        <Icon name="Lightbulb" className="text-accent" size={20} />
+                      </div>
+                      <div>
+                        <div className="font-medium">AI Product Manager</div>
+                        <div className="text-sm text-muted-foreground">Красноярск • От 250,000 ₽</div>
+                      </div>
+                    </div>
+                    <Badge className="bg-accent">7 заявок</Badge>
                   </div>
                 </CardContent>
               </Card>
@@ -928,180 +954,41 @@ const Index = () => {
                       <Progress value={56} className="w-24 [&>div]:bg-accent" />
                     </div>
                   </div>
+
+                  <div className="p-4 rounded-lg bg-gradient-to-r from-secondary/10 to-secondary/5 border border-secondary/20">
+                    <div className="flex items-center gap-3 mb-2">
+                      <Icon name="Brain" className="text-secondary" size={20} />
+                      <div className="font-medium">Машинное обучение для инженеров</div>
+                    </div>
+                    <div className="text-sm text-muted-foreground mb-3">120 часов • СФУ</div>
+                    <div className="flex items-center justify-between">
+                      <div className="text-sm">
+                        <span className="font-medium">41 из 45</span>
+                        <span className="text-muted-foreground"> участников</span>
+                      </div>
+                      <Progress value={91} className="w-24 [&>div]:bg-secondary" />
+                    </div>
+                  </div>
+
+                  <div className="p-4 rounded-lg bg-gradient-to-r from-primary/10 to-primary/5 border border-primary/20">
+                    <div className="flex items-center gap-3 mb-2">
+                      <Icon name="Code" className="text-primary" size={20} />
+                      <div className="font-medium">Python для анализа данных</div>
+                    </div>
+                    <div className="text-sm text-muted-foreground mb-3">80 часов • КрасГАУ</div>
+                    <div className="flex items-center justify-between">
+                      <div className="text-sm">
+                        <span className="font-medium">33 из 40</span>
+                        <span className="text-muted-foreground"> участников</span>
+                      </div>
+                      <Progress value={82} className="w-24 [&>div]:bg-primary" />
+                    </div>
+                  </div>
                 </CardContent>
               </Card>
             </div>
 
-            <Card>
-              <CardHeader>
-                <CardTitle className="flex items-center gap-2">
-                  <Icon name="Brain" className="text-secondary" size={20} />
-                  Специалисты по работе с ИИ
-                </CardTitle>
-                <CardDescription>Кадры, интегрирующие искусственный интеллект в работу ЦЭНК</CardDescription>
-              </CardHeader>
-              <CardContent>
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
-                  <div className="p-5 rounded-lg bg-gradient-to-br from-secondary/10 via-primary/5 to-accent/5 border-2 border-secondary/30 hover:border-secondary/50 transition-all">
-                    <div className="flex items-center gap-3 mb-4">
-                      <div className="h-12 w-12 rounded-lg bg-gradient-to-br from-secondary to-primary flex items-center justify-center">
-                        <Icon name="Users" className="text-white" size={24} />
-                      </div>
-                      <div>
-                        <div className="font-bold text-lg">Инженеры ML/AI</div>
-                        <div className="text-sm text-muted-foreground">Разработка ИИ-систем</div>
-                      </div>
-                    </div>
-                    <div className="space-y-3 text-sm mb-4">
-                      <div className="flex items-center justify-between">
-                        <span className="text-muted-foreground">В штате:</span>
-                        <span className="font-medium">47 специалистов</span>
-                      </div>
-                      <div className="flex items-center justify-between">
-                        <span className="text-muted-foreground">Проекты:</span>
-                        <span className="font-medium">12 активных</span>
-                      </div>
-                      <div className="flex items-center justify-between">
-                        <span className="text-muted-foreground">Зарплата:</span>
-                        <span className="font-medium">От 220,000 ₽</span>
-                      </div>
-                    </div>
-                    <div className="space-y-2 text-sm border-t pt-3">
-                      <div className="flex items-center gap-2">
-                        <Icon name="Code" className="text-secondary" size={16} />
-                        <span>Обучение моделей предиктивной аналитики</span>
-                      </div>
-                      <div className="flex items-center gap-2">
-                        <Icon name="Database" className="text-secondary" size={16} />
-                        <span>Интеграция ИИ с корпоративными данными</span>
-                      </div>
-                    </div>
-                  </div>
 
-                  <div className="p-5 rounded-lg bg-gradient-to-br from-primary/10 via-secondary/5 to-primary/5 border-2 border-primary/30 hover:border-primary/50 transition-all">
-                    <div className="flex items-center gap-3 mb-4">
-                      <div className="h-12 w-12 rounded-lg bg-gradient-to-br from-primary to-secondary flex items-center justify-center">
-                        <Icon name="BarChart3" className="text-white" size={24} />
-                      </div>
-                      <div>
-                        <div className="font-bold text-lg">Data Scientists</div>
-                        <div className="text-sm text-muted-foreground">Анализ больших данных</div>
-                      </div>
-                    </div>
-                    <div className="space-y-3 text-sm mb-4">
-                      <div className="flex items-center justify-between">
-                        <span className="text-muted-foreground">В штате:</span>
-                        <span className="font-medium">34 специалиста</span>
-                      </div>
-                      <div className="flex items-center justify-between">
-                        <span className="text-muted-foreground">Датасеты:</span>
-                        <span className="font-medium">847 обработано</span>
-                      </div>
-                      <div className="flex items-center justify-between">
-                        <span className="text-muted-foreground">Зарплата:</span>
-                        <span className="font-medium">От 180,000 ₽</span>
-                      </div>
-                    </div>
-                    <div className="space-y-2 text-sm border-t pt-3">
-                      <div className="flex items-center gap-2">
-                        <Icon name="TrendingUp" className="text-primary" size={16} />
-                        <span>Выявление паттернов в данных экосистемы</span>
-                      </div>
-                      <div className="flex items-center gap-2">
-                        <Icon name="FileSpreadsheet" className="text-primary" size={16} />
-                        <span>Подготовка данных для обучения моделей</span>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div className="p-5 rounded-lg bg-gradient-to-br from-accent/10 via-secondary/5 to-accent/5 border-2 border-accent/30 hover:border-accent/50 transition-all">
-                    <div className="flex items-center gap-3 mb-4">
-                      <div className="h-12 w-12 rounded-lg bg-gradient-to-br from-accent to-primary flex items-center justify-center">
-                        <Icon name="Workflow" className="text-white" size={24} />
-                      </div>
-                      <div>
-                        <div className="font-bold text-lg">MLOps-инженеры</div>
-                        <div className="text-sm text-muted-foreground">Эксплуатация ИИ-систем</div>
-                      </div>
-                    </div>
-                    <div className="space-y-3 text-sm mb-4">
-                      <div className="flex items-center justify-between">
-                        <span className="text-muted-foreground">В штате:</span>
-                        <span className="font-medium">23 специалиста</span>
-                      </div>
-                      <div className="flex items-center justify-between">
-                        <span className="text-muted-foreground">Моделей:</span>
-                        <span className="font-medium">18 в продакшене</span>
-                      </div>
-                      <div className="flex items-center justify-between">
-                        <span className="text-muted-foreground">Зарплата:</span>
-                        <span className="font-medium">От 200,000 ₽</span>
-                      </div>
-                    </div>
-                    <div className="space-y-2 text-sm border-t pt-3">
-                      <div className="flex items-center gap-2">
-                        <Icon name="Server" className="text-accent" size={16} />
-                        <span>Развертывание и мониторинг ИИ-моделей</span>
-                      </div>
-                      <div className="flex items-center gap-2">
-                        <Icon name="RefreshCw" className="text-accent" size={16} />
-                        <span>Автоматизация переобучения моделей</span>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div className="p-5 rounded-lg bg-gradient-to-br from-secondary/10 via-accent/5 to-secondary/5 border-2 border-secondary/30 hover:border-secondary/50 transition-all">
-                    <div className="flex items-center gap-3 mb-4">
-                      <div className="h-12 w-12 rounded-lg bg-gradient-to-br from-secondary via-primary to-accent flex items-center justify-center">
-                        <Icon name="Lightbulb" className="text-white" size={24} />
-                      </div>
-                      <div>
-                        <div className="font-bold text-lg">AI Product Managers</div>
-                        <div className="text-sm text-muted-foreground">Управление ИИ-продуктами</div>
-                      </div>
-                    </div>
-                    <div className="space-y-3 text-sm mb-4">
-                      <div className="flex items-center justify-between">
-                        <span className="text-muted-foreground">В штате:</span>
-                        <span className="font-medium">12 специалистов</span>
-                      </div>
-                      <div className="flex items-center justify-between">
-                        <span className="text-muted-foreground">Продуктов:</span>
-                        <span className="font-medium">4 запущено</span>
-                      </div>
-                      <div className="flex items-center justify-between">
-                        <span className="text-muted-foreground">Зарплата:</span>
-                        <span className="font-medium">От 250,000 ₽</span>
-                      </div>
-                    </div>
-                    <div className="space-y-2 text-sm border-t pt-3">
-                      <div className="flex items-center gap-2">
-                        <Icon name="Target" style={{ color: '#00A86B' }} size={16} />
-                        <span>Стратегия внедрения ИИ в бизнес-процессы</span>
-                      </div>
-                      <div className="flex items-center gap-2">
-                        <Icon name="LineChart" style={{ color: '#00A86B' }} size={16} />
-                        <span>Оценка эффективности ИИ-решений</span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                <div className="mt-6 p-4 rounded-lg bg-muted/50 border">
-                  <div className="flex items-start gap-3">
-                    <Icon name="Info" className="text-primary mt-0.5" size={20} />
-                    <div className="space-y-1">
-                      <div className="font-medium">Программа развития ИИ-компетенций</div>
-                      <p className="text-sm text-muted-foreground">
-                        ЦЭНК активно развивает команду специалистов по искусственному интеллекту. Запущены программы переподготовки 
-                        для инженеров и аналитиков. Всего 116 специалистов работают с ИИ-технологиями, обрабатывая данные со всех 
-                        блоков экосистемы: недра, логистика, энергетика и экология.
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
 
             <Card>
               <CardHeader>
